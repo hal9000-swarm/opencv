@@ -330,7 +330,7 @@ bool GStreamerCapture::grabFrame()
     if (gst_app_sink_is_eos(GST_APP_SINK(sink.get())))
         return false;
 
-    sample.attach(gst_app_sink_pull_sample(GST_APP_SINK(sink.get())));
+    sample.attach(gst_app_sink_try_pull_sample(GST_APP_SINK(sink.get()), GST_SECOND * 10));
     if (!sample)
         return false;
 
